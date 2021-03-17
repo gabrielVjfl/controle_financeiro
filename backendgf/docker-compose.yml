@@ -1,0 +1,22 @@
+version: '3.1'
+
+services: 
+  app: 
+    build: .
+    command: yarn start
+    ports: 
+      - '8040:8040'
+    volumes: 
+      - .:/usr/app
+
+  db:
+    container_name: 'database-gofinances'
+    image: mongo
+    restart: always
+    ports: 
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERgf}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSgf}
+      MONGO_INITDB_DATABASE: ${DB_NAMEgf}
+  
